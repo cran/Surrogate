@@ -7,9 +7,9 @@
 fit_model_SurvSurv(
   data,
   copula_family,
-  nknots = 2,
+  n_knots = 2,
   fitted_model = NULL,
-  hessian = TRUE,
+  method = "BFGS",
   maxit = 500
 )
 }
@@ -19,25 +19,21 @@ fit_model_SurvSurv(
 \item{copula_family}{One of the following parametric copula families:
 \code{"clayton"}, \code{"frank"}, \code{"gaussian"}, or \code{"gumbel"}.}
 
-\item{nknots}{Number of internal knots for the Royston-Parmar survival model.}
+\item{n_knots}{Number of internal knots for the Royston-Parmar survival model.}
 
 \item{fitted_model}{Fitted model from which initial values are extracted. If
 \code{NULL} (default), standard initial values are used. This option intended
 for when a model is repeatedly fitted, e.g., in a bootstrap.}
 
-\item{hessian}{A boolean.
-\itemize{
-\item \code{TRUE} (default): Hessian is computed
-\item \code{FALSE}: Hessian is not computed. This can save a small amount of time. This
-can be useful when a model is repeatedly fitted, e.g., in a bootstrap.
-}}
+\item{method}{Optimization algorithm for maximizing the objective function.
+For all options, see \code{?maxLik::maxLik}. Defaults to \code{"BFGRS"}.}
 
 \item{maxit}{Maximum number of iterations for the numeric optimization,
 defaults to 500.}
 }
 \value{
 Returns an S3 object that can be used to perform the sensitivity
-analysis with \code{\link[=ica_SurvSurv_sens]{ica_SurvSurv_sens()}}.
+analysis with \code{\link[=sensitivity_analysis_SurvSurv_copula]{sensitivity_analysis_SurvSurv_copula()}}.
 }
 \description{
 The function \code{fit_model_SurvSurv()} fits the copula model for time-to-event
@@ -73,7 +69,7 @@ Two modelling choices are made before estimating the two bivariate
 distributions described in the previous paragraph:
 \itemize{
 \item The number of internal knots for the Royston-Parmar survival models. This
-is specified through the \code{nknots} argument. The number of knots is assumed to
+is specified through the \code{n_knots} argument. The number of knots is assumed to
 be equal across the four margins.
 \item The parametric family of the bivariate copulas. The parametric family is
 assumed to be equal across treatment groups. This choice is specified through
@@ -112,7 +108,7 @@ if(require(Surrogate)) {
                     Ovarian$SurvInd)
   Surrogate::fit_model_SurvSurv(data = data,
                                 copula_family = "clayton",
-                                nknots = 1)
+                                n_knots = 1)
 }
 
 }
@@ -128,7 +124,7 @@ prognostic modelling and estimation of treatment effects. Statistics in
 medicine, 21(15), 2175-2197.
 }
 \seealso{
-\code{\link[=marginal_gof_scr]{marginal_gof_scr()}}, \code{\link[=ica_SurvSurv_sens]{ica_SurvSurv_sens()}}
+\code{\link[=marginal_gof_scr]{marginal_gof_scr()}}, \code{\link[=sensitivity_analysis_SurvSurv_copula]{sensitivity_analysis_SurvSurv_copula()}}
 }
 \author{
 Florian Stijven
