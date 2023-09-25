@@ -21,12 +21,15 @@ summary.ICA.BinCont <- function(object, ..., Object){
   
   cat("\n\n\n# R2_H results summary")
   cat("\n#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")  
-  cat("Mean (SD) R2_H: ", format(round(mean(Object$R2_H), 4), nsmall = 4), " (", format(round(sd(Object$R2_H), 4), nsmall = 4), ")", 
-      "  [min: ", format(round(min(Object$R2_H), 4), nsmall = 4), "; max: ",  format(round(max(Object$R2_H), 4), nsmall = 4), "]", sep="")
-  cat("\nMode R2_H: ", format(round(mode(Object$R2_H)$mode_val, 4), nsmall = 4))
-  cat("\n\nQuantiles of the R2_H distribution: \n\n")
-  quant <- quantile(Object$R2_H, probs = c(.05, .10, .20, .50, .80, .90, .95))
-  print(quant)
+  cat("Mean (SD) R2_H:", format(round(mean(Object$R2_H), 4), nsmall = 4), " (", format(round(sd(Object$R2_H), 4), nsmall = 4), ")") 
+  cat("\nMode R2_H:", format(round(mode(Object$R2_H)$mode_val, 4), nsmall = 4))
+  cat("\nMedian R2_H:", round(median(Object$R2_H), 4))
+  cat("\nRange R2_H: [", round(range(Object$R2_H)[1], 4), ",", round(range(Object$R2_H)[2], 4), "]")
+  cat("\nSDI0.95 R2_H: [", round(quantile(Object$R2_H, probs=0.025), 4), ",", round(quantile(Object$R2_H, probs=0.975), 4), "]")
+  cat("\nSDI0.90 R2_H: [", round(quantile(Object$R2_H, probs=0.05), 4), ",", round(quantile(Object$R2_H, probs=0.95), 4), "]")
+  cat("\nSDI0.85 R2_H: [", round(quantile(Object$R2_H, probs=0.075), 4), ",", round(quantile(Object$R2_H, probs=0.925), 4), "]")
+  cat("\nSDI0.80 R2_H: [", round(quantile(Object$R2_H, probs=0.1), 4), ",", round(quantile(Object$R2_H, probs=0.9), 4), "]")
+  cat("\nSDI0.75 R2_H: [", round(quantile(Object$R2_H, probs=0.125), 4), ",", round(quantile(Object$R2_H, probs=0.875), 4), "]")
 }
   
 

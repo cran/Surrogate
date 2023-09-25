@@ -1,7 +1,7 @@
-d9a1404ce406af3a4fa448c01daf6c5c *DESCRIPTION
-68218ecfa202956eadaf7286a1c78abf *NAMESPACE
+8dfe8b9c39a10722f40b73400f2b2c44 *DESCRIPTION
+e6aecefc1c416d23bf2883c00fb7d597 *NAMESPACE
 d74b2eddc4b01daf6712ba6ed657e6a9 *NEWS
-e246926ee2f560f18dad6b7fc23e08f3 *NEWS.md
+4bd34b98eaeb6f38003347722be08b4a *NEWS.md
 2d4258d995d2474f630e9c28bddf8c98 *R/AA.MultS.R
 19d4fca4b8d8b0fb5f2c1c7a85a0778f *R/BifixedContCont.R
 6e0fa623193d6b241cd0511e730d2cdb *R/BimixedContCont.R
@@ -20,6 +20,7 @@ bf40ff36dab58150d994e304b683de4c *R/FixedDiscrDiscrIT.R
 10ed8e48e357ad2e806650cdb49e3adb *R/ICA.BinBin.Grid.Full.R
 23e9388cd76500ceb863ef3ae78e33e8 *R/ICA.BinBin.Grid.Sample.R
 e30b95555bf7d0e654c52167f315e2a5 *R/ICA.BinBin.Grid.Sample.Uncert.R
+edc4ea84bf0d9817f8eb17280c24a936 *R/ICA.BinCont.BS.R
 73fdd5873161de73aaeb4e3f2269c036 *R/ICA.BinCont.R
 1e668498985586718b31df7a5289ff32 *R/ICA.Cont.Cont.MultS.R
 79a3c2cfb2f15dacc625c69a6b751e78 *R/ICA.Cont.Cont.MultS_alt.R
@@ -107,7 +108,7 @@ ac36e8fa9329cb0402e0411a83e8023f *R/summary.TrialLevelIT.R
 85514deff8f015e8aea50fc6609cdb7e *R/summary.TwoStageSurvSurv.R
 3119b52745d68ae20ece6aa92e7dbeda *R/summaryBinContCombnIT.R
 2834a83c80dbc91fbec1a2495a64a6a0 *R/summary_ICABinBin.R
-0dc7b9956fb581a4d6a3b1143d530e65 *R/summary_ICABinCont.R
+7fc3055c832e97c189d09ffea33d8816 *R/summary_ICABinCont.R
 3dea53deae611aefa2ee9f546354a7a7 *R/summary_MaxEntContCont.R
 ddedf1f868a5cb58e22fefa8d9666cb4 *R/summary_MaxEntICABinBin.R
 34c8972527fc8266793317ae2411cc03 *R/utils.R
@@ -138,6 +139,7 @@ bf1073d3510612c1cd6cd8f623e4fd48 *man/FixedDiscrDiscrIT.Rd
 9ac4f9c9d980abe9846e47e27e40d2b4 *man/ICA.BinBin.Grid.Full.Rd
 e7bc76a4c299ecd0b1eb68d37e7e4449 *man/ICA.BinBin.Grid.Sample.Rd
 9aa85cdf0d5682e2262625938457a914 *man/ICA.BinBin.Grid.Sample.Uncert.Rd
+4922d161be2d897080dedf97392a6456 *man/ICA.BinCont.BS.Rd
 ec064d629854507f3744f87f988cb8ce *man/ICA.ContCont.MultS.MPC.Rd
 f1b24620e6a7279cafb1ed81c9e78dad *man/ICA.ContCont.MultS.PC.Rd
 355d8165a5d7ec716a17769e9ecd2536 *man/ICA.ContCont.MultS.Rd
