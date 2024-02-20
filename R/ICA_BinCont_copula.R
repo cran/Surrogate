@@ -4,6 +4,7 @@ compute_entropy = function(probs) {
 
 
 estimate_mutual_information_BinCont = function(delta_S, delta_T) {
+  requireNamespace("cubature")
   # Estimate three conditional densities for the three possible values of delta
   # T.
   lower_S = min(delta_S)
@@ -149,9 +150,11 @@ estimate_ICA_BinCont = function(delta_S, delta_T) {
 #'   `rotation_par` correspond to \eqn{(c_{12}, c_{23}, c_{34}, c_{13;2},
 #'   c_{24;3}, c_{14;23})}.
 #' @param copula_family1 Copula family of \eqn{c_{12}} and \eqn{c_{34}}. For the
-#'   possible options, see `loglik_copula_scale()`.
+#'   possible options, see `loglik_copula_scale()`. The elements of
+#'   `copula_family` correspond to \eqn{(c_{12}, c_{34})}.
 #' @param copula_family2 Copula family of the other bivariate copulas. For the
-#'   possible options, see `loglik_copula_scale()`.
+#'   possible options, see `loglik_copula_scale()`. The elements of
+#'   `copula_family2` correspond to \eqn{(c_{23}, c_{13;2}, c_{24;3}, c_{14;23})}.
 #' @param n Number of samples to be taken from the D-vine copula.
 #'
 #'
@@ -179,39 +182,52 @@ sample_dvine = function(copula_par,
   r24_3 = rotation_par[5]
   r14_23 = rotation_par[6]
 
+  # If the copula families are vectors with only 1 element, they are appended to
+  # the correct length.
+  force(copula_family1);force(copula_family2)
+  if(length(copula_family1) == 1) copula_family1 = rep(copula_family1, 2)
+  if(length(copula_family2) == 1) copula_family2 = rep(copula_family2, 4)
+  # D-vine copula classes/family.
+  fam12 = copula_family1[1]
+  fam23 = copula_family2[1]
+  fam34 = copula_family1[2]
+  fam13_2 = copula_family2[2]
+  fam24_3 = copula_family2[3]
+  fam14_23 = copula_family2[4]
+
   pair_copulas = list(
     list(
       rvinecopulib::bicop_dist(
-        family = copula_family1,
+        family = fam12,
         rotation = r12,
         parameters = c12
       ),
       rvinecopulib::bicop_dist(
-        family = copula_family2,
+        family = fam23,
         rotation = r23,
         parameters = c23
       ),
       rvinecopulib::bicop_dist(
-        family = copula_family1,
+        family = fam34,
         rotation = r34,
         parameters = c34
       )
     ),
     list(
       rvinecopulib::bicop_dist(
-        family = copula_family2,
+        family = fam13_2,
         rotation = r13_2,
         parameters = c13_2
       ),
       rvinecopulib::bicop_dist(
-        family = copula_family2,
+        family = fam24_3,
         rotation = r24_3,
         parameters = c24_3
       )
     ),
     list(
       rvinecopulib::bicop_dist(
-        family = copula_family2,
+        family = fam14_23,
         rotation = r14_23,
         parameters = c14_23
       )
@@ -244,6 +260,12 @@ sample_dvine = function(copula_par,
 #' @param setting Should be one of the following two:
 #' * `"BinCont"`: for when \eqn{S} is continuous and \eqn{T} is binary.
 #' * `"SurvSurv"`: for when both \eqn{S} and \eqn{T} are time-to-event variables.
+#' @param plot_deltas Plot the sampled individual causal effects? Defaults to
+#' `FALSE`.
+#' @param restr_time Restriction time for the potential outcomes. Defaults to
+#' `+Inf` which means no restriction. Otherwise, the sampled potential outcomes
+#' are replace by `pmin(S0, restr_time)` (and similarly for the other potential
+#' outcomes).
 #'
 #' @inheritParams sample_dvine
 #'
@@ -265,7 +287,9 @@ sample_deltas_BinCont = function(copula_par,
                                  q_T1 = NULL,
                                  marginal_sp_rho = TRUE,
                                  setting = "BinCont",
-                                 composite = FALSE){
+                                 composite = FALSE,
+                                 plot_deltas = FALSE,
+                                 restr_time = +Inf){
   # Sample data on the copula scale.
   U = sample_dvine(copula_par,
                    rotation_par,
@@ -295,23 +319,59 @@ sample_deltas_BinCont = function(copula_par,
     S0 = pmin(S0, T0)
     S1 = pmin(S1, T1)
   }
+  # Restrict the potential outcomes to a finite interval (if asked).
+  S0 = pmin(S0, restr_time)
+  S1 = pmin(S1, restr_time)
+  T0 = pmin(T0, restr_time)
+  T1 = pmin(T1, restr_time)
+
   Delta_dataframe = data.frame(DeltaS = S1 - S0,
                                DeltaT = T1 - T0)
   # Compute the pairwise marginal Spearman's rho values from the sample.
+  sp_rho_matrix = matrix(NA, ncol = 4, nrow = 4)
+  survival_classification = c(
+    prop_harmed = NA,
+    prop_protected = NA,
+    prop_always = NA,
+    prop_never = NA
+  )
   if (marginal_sp_rho) {
-    sp_rho_matrix = NULL
     sp_rho_matrix = stats::cor(data.frame(T0, S0, S1, T1), method = "spearman")
     # If we're in the survival-survival setting, then the 2x2 survival
     # classification is also computed.
-    survival_classification = NULL
+
     if (setting == "SurvSurv") {
-      prop_harmed = mean((S0 == T0) &
-                           (S1 < T1))
-      prop_protected = mean((S0 < T0) &
-                              (S1 == T1))
-      prop_always = mean((S0 < T0) &
-                           (S1 < T1))
+      harmed = (S0 == T0) & (S1 < T1)
+      protected = (S0 < T0) & (S1 == T1)
+      always = (S0 < T0) & (S1 < T1)
+      if (plot_deltas) {
+        never = !harmed & !protected & !always
+        plot(
+          Delta_dataframe[always, ],
+          xlab = "Delta S",
+          ylab = "Delta T",
+          xlim = c(min(Delta_dataframe$DeltaS), max(Delta_dataframe$DeltaS)),
+          ylim = c(min(Delta_dataframe$DeltaT), max(Delta_dataframe$DeltaT)),
+          col = rgb(red = 0, green = 0, blue = 0, alpha = 0.1),
+          cex = 0.5
+        )
+        points(Delta_dataframe[harmed,], col = rgb(red = 1, green = 0, blue = 0, alpha = 0.1), cex = 0.5)
+        points(Delta_dataframe[protected,], col = rgb(red = 0, green = 0, blue = 1, alpha = 0.1), cex = 0.5)
+        points(Delta_dataframe[never,], col = rgb(red = 0, green = 1, blue = 0, alpha = 0.1), cex = 0.5)
+        legend(
+          x = "topleft",
+          col = c("black", "red", "blue", "green"),
+          pch = 1,
+          legend = c("Always", "Harmed", "Protected", "Never"),
+          title = "Progression Type"
+        )
+      }
+
+      prop_harmed = mean(harmed)
+      prop_protected = mean(protected)
+      prop_always = mean(always)
       prop_never = 1 - prop_harmed - prop_protected - prop_always
+
       survival_classification = c(prop_harmed = prop_harmed,
                                   prop_protected = prop_protected,
                                   prop_always = prop_always,
@@ -356,6 +416,7 @@ compute_ICA_BinCont = function(copula_par,
                                marginal_sp_rho = TRUE,
                                seed = 1)
 {
+  requireNamespace("withr")
   withr::local_seed(seed)
   # Sample individual causal treatment effects from the given model. If
   # marginal_sp_rho = TRUE, then the Spearman's correlation matrix is also

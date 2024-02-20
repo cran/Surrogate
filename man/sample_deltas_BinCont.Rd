@@ -17,7 +17,9 @@ sample_deltas_BinCont(
   q_T1 = NULL,
   marginal_sp_rho = TRUE,
   setting = "BinCont",
-  composite = FALSE
+  composite = FALSE,
+  plot_deltas = FALSE,
+  restr_time = +Inf
 )
 }
 \arguments{
@@ -31,10 +33,12 @@ bivariate copulas that define the D-vine copula. The elements of
   c_{24;3}, c_{14;23})}.}
 
 \item{copula_family1}{Copula family of \eqn{c_{12}} and \eqn{c_{34}}. For the
-possible options, see \code{loglik_copula_scale()}.}
+possible options, see \code{loglik_copula_scale()}. The elements of
+\code{copula_family} correspond to \eqn{(c_{12}, c_{34})}.}
 
 \item{copula_family2}{Copula family of the other bivariate copulas. For the
-possible options, see \code{loglik_copula_scale()}.}
+possible options, see \code{loglik_copula_scale()}. The elements of
+\code{copula_family2} correspond to \eqn{(c_{23}, c_{13;2}, c_{24;3}, c_{14;23})}.}
 
 \item{n}{Number of samples to be taken from the D-vine copula.}
 
@@ -61,6 +65,14 @@ matrix? Defaults to \code{TRUE}.}
 endpoint is a composite of both a "pure" surrogate endpoint and the true
 endpoint, e.g., progression-free survival is the minimum of time-to-progression
 and time-to-death.}
+
+\item{plot_deltas}{Plot the sampled individual causal effects? Defaults to
+\code{FALSE}.}
+
+\item{restr_time}{Restriction time for the potential outcomes. Defaults to
+\code{+Inf} which means no restriction. Otherwise, the sampled potential outcomes
+are replace by \code{pmin(S0, restr_time)} (and similarly for the other potential
+outcomes).}
 }
 \value{
 A list with two elements:

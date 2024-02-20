@@ -51,12 +51,10 @@ importFrom("stats", "uniroot")
 importFrom("graphics", "arrows")
 importFrom("stats", "weighted.mean")
 importFrom("stats", "approxfun")
-import(cubature)
-import(fitdistrplus)
+importFrom("stats", "resid")
+importFrom("grDevices", "rgb")
 import(maxLik)
 import(purrr)
-import(stringr)
-import(withr)
 
 
 export(plot.UnifixedContCont, plot.UnimixedContCont, plot.BifixedContCont, plot.BimixedContCont,
@@ -96,11 +94,14 @@ export(AA.MultS, BifixedContCont, BimixedCbCContCont,
        Sim.Data.STS, Sim.Data.STSBinBin, Single.Trial.RE.AA,
        SurvSurv, Test.Mono, TrialLevelIT,
        TrialLevelMA, TwoStageSurvSurv, UnifixedContCont, UnimixedContCont,
-       SPF.BinBin, SPF.BinCont)
+       SPF.BinBin, SPF.BinCont, MufixedContCont.MultS, MumixedContCont.MultS)
 export(MICA.ContCont)
 export(sensitivity_analysis_SurvSurv_copula, model_fit_measures,
-       marginal_gof_scr, fit_model_SurvSurv)
+       fit_model_SurvSurv)
 export(sensitivity_analysis_BinCont_copula, fit_copula_model_BinCont)
+export(marginal_gof_scr_S_plot, marginal_gof_scr_T_plot,
+       prob_dying_without_progression_plot, mean_S_before_T_plot_scr)
+export(sensitivity_intervals_Dvine)
 
 
 S3method(plot, Fano.BinBin)
@@ -134,6 +135,7 @@ S3method(plot, ICA.ContCont.MultS)
 S3method(plot, PPE.BinBin)
 S3method(plot, comb27.BinBin)
 S3method(plot, ISTE.ContCont)
+S3method(plot, vine_copula_SurvSurv_fit)
 
 S3method(summary, Fano.BinBin)
 S3method(summary, UnifixedContCont)
@@ -171,4 +173,11 @@ S3method(summary, Bootstrap.MEP.BinBin)
 S3method(summary, ISTE.ContCont)
 S3method(summary, BimixedCbCContCont)
 
+S3method(summary, MufixedContCont.MultS)
+S3method(summary, MumixedContCont.MultS)
+
+
+
 S3method(print, vine_copula_SurvSurv_fit)
+S3method(print, sensitivity_intervals_Dvine)
+

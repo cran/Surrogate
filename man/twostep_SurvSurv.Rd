@@ -37,12 +37,12 @@ twostep_SurvSurv(
 \item \code{"frank"}
 \item \code{"gumbel"}
 \item \code{"gaussian"}
-
-The parameterization of the respective copula families can be found in the
-help files of the dedicated functions named \code{copula_loglik_copula_scale()}.
 }}
 
-\item{n_knots}{Number of internal knots for the Royston-Parmar survival model.}
+\item{n_knots}{Number of internal knots for the Royston-Parmar survival
+models for \eqn{\tilde{S}_0}, \eqn{T_0}, \eqn{\tilde{S}_1}, and \eqn{T_1}.
+If \code{length(n_knots) == 1}, the same number of knots are assumed for the
+four marginal distributions.}
 
 \item{method}{Optimization algorithm for maximizing the objective function.
 For all options, see \code{?maxLik::maxLik}. Defaults to \code{"BFGRS"}.}
