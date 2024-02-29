@@ -69,7 +69,8 @@ sensitivity_intervals_Dvine = function(fitted_model,
                                        alpha = 0.05,
                                        n_prec = 5e3,
                                        mutinfo_estimator = NULL,
-                                       restr_time = +Inf) {
+                                       restr_time = +Inf,
+                                       ncores = 1) {
   # Select row with the smallest value for the ICA.
   upper_limit_row = sens_results[which.max(sens_results[[measure]]), ]
   # Select row with the largest value for the ICA.
@@ -95,7 +96,8 @@ sensitivity_intervals_Dvine = function(fitted_model,
     seed = 1,
     measure = measure,
     mutinfo_estimator = mutinfo_estimator,
-    restr_time = restr_time
+    restr_time = restr_time,
+    ncores = ncores
   )
 
   # Perform parametric bootstrap for setting that yielded largest ICA.
@@ -110,8 +112,21 @@ sensitivity_intervals_Dvine = function(fitted_model,
     seed = 1,
     measure = measure,
     mutinfo_estimator = mutinfo_estimator,
-    restr_time = restr_time
+    restr_time = restr_time,
+    ncores = ncores
   )
+
+  # We allow for NAs in the boostrap replications, but give a warning.
+  if(any(is.na(bootstrap_replications_lower))) {
+    number_nas = sum(is.na(bootstrap_replications_lower))
+    warning(paste0("In ", as.character(number_nas), " of the boostrap replications for the lower limit, ICA could not be computed."))
+    bootstrap_replications_lower = na.omit(bootstrap_replications_lower)
+  }
+  if(any(is.na(bootstrap_replications_upper))) {
+    number_nas = sum(is.na(bootstrap_replications_upper))
+    warning(paste0("In ", as.character(number_nas), " of the boostrap replications for the upper limit, ICA could not be computed."))
+    bootstrap_replications_upper = na.omit(bootstrap_replications_upper)
+  }
 
   # Compute confidence intervals for the two scenarios selected above. For the
   # uncertainty intervals with pointwise 1 - alpha coverage, we can consider the

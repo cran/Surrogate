@@ -12,7 +12,8 @@ sensitivity_intervals_Dvine(
   alpha = 0.05,
   n_prec = 5000,
   mutinfo_estimator = NULL,
-  restr_time = +Inf
+  restr_time = +Inf,
+  ncores = 1
 )
 }
 \arguments{
@@ -43,6 +44,10 @@ between the first two arguments which are numeric vectors. Defaults to
 \code{+Inf} which means no restriction. Otherwise, the sampled potential outcomes
 are replace by \code{pmin(S0, restr_time)} (and similarly for the other potential
 outcomes).}
+
+\item{ncores}{Number of cores used in the sensitivity analysis. The
+computations are computationally heavy, and this option can speed things up
+considerably.}
 }
 \value{
 An S3 object of the class \code{sensitivity_intervals_Dvine} which can be
@@ -120,7 +125,7 @@ sens_results = sensitivity_analysis_SurvSurv_copula(fitted_model,
                   n_sim = 5,
                   n_prec = 2000,
                   copula_family2 = "clayton",
-                  cond_ind = TRUE)
+                  eq_cond_association = TRUE)
 # Compute intervals of ignorance and uncertainty. Again, the number of
 # bootstrap replications should be larger in practice.
 sensitivity_intervals_Dvine(fitted_model, sens_results, B = 10)

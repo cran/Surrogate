@@ -119,6 +119,7 @@ delta_method_log_mutinfo = function(fitted_model,
 #'
 #' @param B Number of bootstrap replications
 #' @inheritParams ICA_given_model_constructor
+#' @inheritParams sensitivity_analysis_SurvSurv_copula
 #'
 #' @return (numeric) Vector of bootstrap replications for the estimated ICA.
 summary_level_bootstrap_ICA = function(fitted_model,
@@ -131,7 +132,9 @@ summary_level_bootstrap_ICA = function(fitted_model,
                                        mutinfo_estimator = NULL,
                                        composite,
                                        seed,
-                                       restr_time = +Inf) {
+                                       restr_time = +Inf,
+                                       ncores = 1) {
+  withr::local_seed(seed)
   # Parameter estimates
   theta_hat = c(coef(fitted_model$fit_0), coef(fitted_model$fit_1))
 
@@ -141,18 +144,28 @@ summary_level_bootstrap_ICA = function(fitted_model,
   vcov_matrix = rbind(cbind(vcov(fitted_model$fit_0), zeros_matrix),
                       cbind(t(zeros_matrix), vcov(fitted_model$fit_1)))
 
-  ICA_given_model = ICA_given_model_constructor(
-    fitted_model = fitted_model,
-    copula_par_unid = copula_par_unid,
-    copula_family2 = copula_family2,
-    rotation_par_unid = rotation_par_unid,
-    n_prec = n_prec,
-    measure = measure,
-    mutinfo_estimator = mutinfo_estimator,
-    composite = composite,
-    seed = seed,
-    restr_time = restr_time
+  ICA_given_model_original = ICA_given_model_constructor(
+    fitted_model = force(fitted_model),
+    copula_par_unid = force(copula_par_unid),
+    copula_family2 = force(copula_family2),
+    rotation_par_unid = force(rotation_par_unid),
+    n_prec = force(n_prec),
+    measure = force(measure),
+    mutinfo_estimator = force(mutinfo_estimator),
+    composite = force(composite),
+    seed = force(seed),
+    restr_time = force(restr_time)
   )
+  ICA_given_model = function(theta) {
+    tryCatch(
+      ICA_given_model_original(theta),
+      error = function(e) {
+        print(e)
+        return(NA)
+      }
+    )
+  }
+
 
   # Resample parameter estimates from the estimated multivariate normal sampling
   # distribution.
@@ -172,14 +185,43 @@ summary_level_bootstrap_ICA = function(fitted_model,
     theta_resampled[, a + b] = (exp(2 * theta_resampled[, a + b]) - 1) / (exp(2 * theta_resampled[, a + b]) + 1)
   }
 
+  if (ncores > 1 & requireNamespace("parallel")) {
+    cl  <- parallel::makeCluster(ncores)
+    # helper function
+    # surrogacy_sample_sens <- surrogacy_sample_sens
+    print("Starting parallel simulations")
 
-
-  # Compute the ICA for the resampled parameter estimates.
-  ICA_hats = apply(
-    X = theta_resampled,
-    FUN = ICA_given_model,
-    MARGIN = 1
-  )
+    # Get current search path and set the same search path in the new instances
+    # of R. Usually, this would not be necessary, but if the user changed the
+    # search path before running this function, there could be an issue.
+    search_path = .libPaths()
+    force(search_path)
+    parallel::clusterExport(
+      cl = cl,
+      varlist = c("search_path", "ICA_given_model_original"),
+      envir = environment()
+    )
+    parallel::clusterEvalQ(cl = cl, expr = .libPaths(new = search_path))
+    ICA_hats = parallel::parApply(
+      cl = cl,
+      X = theta_resampled,
+      FUN = ICA_given_model,
+      MARGIN = 1
+    )
+    print("Finishing parallel simulations")
+    on.exit(expr = {
+      parallel::stopCluster(cl)
+      rm("cl")
+    })
+  }
+  else {
+    # Compute the ICA for the resampled parameter estimates.
+    ICA_hats = apply(
+      X = theta_resampled,
+      FUN = ICA_given_model,
+      MARGIN = 1
+    )
+  }
 
   return(ICA_hats)
 }
@@ -234,6 +276,10 @@ ICA_given_model_constructor = function(fitted_model,
   r_34 = fitted_model$copula_rotations[2]
   marginal_sp_rho = TRUE
   if (measure %in% c("ICA", "sp_rho")) marginal_sp_rho = FALSE
+
+  force(n_prec); force(mutinfo_estimator); force(copula_par_unid)
+  force(copula_family2); force(rotation_par_unid); force(composite)
+  force(seed); force(restr_time)
 
   ICA_given_model = function(theta) {
     # The first k + 1 elements of theta correspond to the parameters in fit_0,
