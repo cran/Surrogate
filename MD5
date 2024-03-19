@@ -1,15 +1,15 @@
-0a4613d436eb9bb0b4dd91894c0c69d0 *DESCRIPTION
-1e081c8acaab078b9a6d763071155059 *NAMESPACE
+0a5eaabe53345ee118169505300d7cb1 *DESCRIPTION
+768ca2815242ee88ad191606aaf4c6c5 *NAMESPACE
 d1ff06d434e1b2318c8d1028824c42a7 *NEWS
-41145e56e583cb497893f9dd4b24ec2b *NEWS.md
+2455c63611ce3f8cea4ee3c3e969f6a9 *NEWS.md
 2d4258d995d2474f630e9c28bddf8c98 *R/AA.MultS.R
-19d4fca4b8d8b0fb5f2c1c7a85a0778f *R/BifixedContCont.R
-6e0fa623193d6b241cd0511e730d2cdb *R/BimixedContCont.R
+6da266936555d360d251d0d6a7cafcba *R/BifixedContCont.R
+ddebadcc274df3861aa4bf801e18caae *R/BimixedContCont.R
 8b7b81a98e4f0a9302f70208ad6c9297 *R/Bootstrap.MEP.BinBin.R
 ab85160c10504c979e2bf3f16498c860 *R/CausalDiagramBinBin.R
 0d1d543fdbc785e470f1ae5f14ec7b73 *R/CausalDiagramContCont.R
 d8ad828346dc1d2f7096286790ae5c34 *R/CbC.R
-2fa0d779d8f98d77916080f71bae906c *R/Data.Processing.R
+a50f089fa6f4d5cc5745f6ef08119691 *R/Data.Processing.R
 c606483656bad22d74b8132ecf630c36 *R/ECT.R
 c1be29c014eb0313c3ef9e9a5d16aa5e *R/Fano.BinBin.R
 4fbc6c23857883d479acea5dbe9d4f3f *R/FixedBinBinIT.r
@@ -44,8 +44,8 @@ e0c0f6aef36026d99bc1b4eddd561465 *R/MaxEntContCont.R
 910936f61f3020ef1cb2ad63fd13d33b *R/MaxEntSPFBinBin.R
 ada22f12228a59f478e563c14a5ffe73 *R/MinSurrContCont.R
 dd74a8dd345b2a9e48d60d4f390cdaca *R/MixedContContIT.R
-8c9af111f68fb1d63c36ff0c74252821 *R/MufixedContCont.MultS.R
-bae6eb8bedbebbc95b711397f486d0bc *R/MumixedContCont.MultS.R
+012adb3764c57f01f11fc407992b2940 *R/MufixedContCont.MultS.R
+4943f45a85301885711efb188dffcc7e *R/MumixedContCont.MultS.R
 8f42ba0183f14fb7f3a48ce8e9d19c0c *R/PPE.BinBin.R
 b65f58bbaf728c0f6a2930f3d5109e45 *R/PROC.BinBin.R
 d9acdb47ccf1529c6eff3de9ae8edd53 *R/Plot.FixedDiscrDiscrIT.R
@@ -69,7 +69,7 @@ bea240dbd0bdf6c82538210231a1f03e *R/SummaryITContCont.R
 960fc38c25b514999dd183e411410d57 *R/SummaryMetaAnalyticSTSContCont.R
 0204c53b9cff5ba408cc0590d9b08ea2 *R/SummarySPPBinBin.R
 eb24737eba6b890c9f74ffd00cd47c04 *R/SummaryTrialLevelMA.R
-2385422c8153a3de536ba898f22934de *R/SurvSurv.R
+9062dadfb136217ced06ec031a6c5975 *R/SurvSurv.R
 cec230357f91879a32dc79e20f738a13 *R/Test.Mono.R
 34b78a16f853cfb8b56648fa6044be29 *R/TrialLevelIT.R
 050e737cff1f97b2d1ed83abb5d39a45 *R/TrialLevelMA.R
@@ -116,6 +116,8 @@ ac36e8fa9329cb0402e0411a83e8023f *R/summary.TrialLevelIT.R
 7fc3055c832e97c189d09ffea33d8816 *R/summary_ICABinCont.R
 3dea53deae611aefa2ee9f546354a7a7 *R/summary_MaxEntContCont.R
 ddedf1f868a5cb58e22fefa8d9666cb4 *R/summary_MaxEntICABinBin.R
+f36e5cde570eaf60e6ae8a589723c3da *R/survbin.R
+40230971c96e862ad6075faa80828490 *R/survcat.R
 01ece7f60741a5828e01d06ab0df6a6d *R/utils.R
 94f19668ad050da31be218dfc23fe885 *README.md
 17cd34f4d8cc50a4662735d4daab806f *data/ARMD.MultS.rda
@@ -126,6 +128,8 @@ a1cf0ab2bd92b03f576383e1e7e4a41a *data/PANSS.rda
 f2459384dd6b545910f433fb97ed5f7e *data/Schizo_Bin.rda
 dfea67a867c6e5499c7a053629e6be7d *data/Schizo_BinCont.rda
 f974c2b04ccf73ed94195eecd8e062cd *data/Schizo_PANSS.rda
+85bd4c66a984886b14bc9bac651ab8dc *data/colorectal.rda
+40114c6f4e6003c2622aacb8b90d29a0 *data/colorectal4.rda
 8558cb7e4fc063546fe9b3b48cc1d341 *man/AA.MultS.Rd
 bafa158e63f007f6ac6aa9962e6dbc45 *man/ARMD.MultS.Rd
 be1d8435763cf09178b29d4692b2a3fe *man/ARMD.Rd
@@ -202,6 +206,8 @@ f5963cbb6eed3c7b5abb69848cdb0a6c *man/TrialLevelMA.Rd
 f211ab8a7e06bf03bb5115cf3295f3a9 *man/binary_continuous_loglik.Rd
 a0cfa0f0a50f29e80f689d47648d08b6 *man/cdf_fun.Rd
 c7e9dc17b3545909c0d70df787536092 *man/clayton_loglik_copula_scale.Rd
+39497e0efef92fae9881e7552a9ca042 *man/colorectal.rd
+9f515429c677d50daebfd2183c5475fa *man/colorectal4.rd
 515ba9d3fa68216aaeb97da870a658ba *man/comb27.BinBin.Rd
 41c0fbc74f84479cd8f35b66410f1ddc *man/compute_ICA_BinCont.Rd
 50fa5e801c4f7d997d81e6afa6bfb6f7 *man/compute_ICA_SurvSurv.Rd
@@ -244,6 +250,10 @@ e6062db25aae0825944eea371b6ef4d0 *man/plot.TrialLevelIT.Rd
 3241f36f4c01fc7d3a30ebb411c166bc *man/plot.TrialLevelMA.Rd
 11b92825b1890f507a1383cac1454e32 *man/plot.TwoStageSurvSurv.Rd
 429ea4f6cf0d1f1c17dc0d6571ad4f17 *man/plot.comb27.BinBin.Rd
+22a4560c1dc86c650da9ecf8e935097c *man/plot.survbin.Rd
+0b54cb7fd7a8918a7e2562f3bed233c1 *man/plot.survcat.Rd
+507febc45161649fd1cd2f8c0c48120b *man/print.survbin.Rd
+f95ab4bbdff18f6581b68863d527c53a *man/print.survcat.Rd
 72e5e634b31fa5542402784791365f40 *man/sample_copula_parameters.Rd
 c044cfe3a7f9a83cbb3ecf3787131b70 *man/sample_deltas_BinCont.Rd
 3b0df799f081678d927fc94d2608fbcc *man/sample_dvine.Rd
@@ -251,7 +261,11 @@ bf1e5febd11b397e7a0ae504eddd96d4 *man/sensitivity_analysis_BinCont_copula.Rd
 eba3105b6d3ab09f4f440eeb9d0e9aa6 *man/sensitivity_analysis_SurvSurv_copula.Rd
 718657477427f87e8ea11549a11ada2f *man/sensitivity_intervals_Dvine.Rd
 3a931a0ec14066e85e3b841d73b5a46e *man/summary.gen.Rd
+5a7914c38e468f5c1f543804bc58afa8 *man/summary.survbin.Rd
+0c04f6c159075a151a8c59a518802cc9 *man/summary.survcat.Rd
 3a7903826931d56ba2dbba7653721121 *man/summary_level_bootstrap_ICA.Rd
+f27f9d3398d58732d313510df7fb76b3 *man/survbin.Rd
+2add80c19f7cecb372de640b5b1d5c6c *man/survcat.Rd
 2b40fdbd5d6953d2dc05ae4ee526bbaa *man/twostep_BinCont.Rd
 ecaa681c2dac2dbf5b806a5fd02115c8 *man/twostep_SurvSurv.Rd
 3df19b6ddfb5c3c803d7611fb72f98df *tests/testthat.R
@@ -284,3 +298,5 @@ cbc40c4bfeee29a9544060bd2d01a18f *tests/testthat/test-likelihood_copula_models.R
 00c052e65796657f1a4500b5c9537266 *tests/testthat/test-sensitivity_analysis_BinCont_copula.R
 79b72bc0414a8a1243942655ad997c17 *tests/testthat/test-sensitivity_analysis_SurvSurv.R
 0b02443e0d2c0b61cd29da35c3649ad1 *tests/testthat/test-sensitivity_intervals.R
+a318d2561e012d0ea2a043f0c0273d1e *tests/testthat/test-survbin.R
+147479ec133985fcf8edbf8d54f65a73 *tests/testthat/test-survcat.R

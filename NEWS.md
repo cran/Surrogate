@@ -1,5 +1,10 @@
 # Surrogate 3.2
 
+## Surrogate 3.2.5
+
+* Added functions `survbin()` and `survcat()` to evaluate categorical surrogates 
+for time-to-event true endpoints in the meta-analytic framework.
+
 ## Surrogate 3.2.4
 
 * In the sensitivity analyses, we now have to option to set conditional 
