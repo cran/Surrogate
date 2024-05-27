@@ -1,7 +1,7 @@
-0a5eaabe53345ee118169505300d7cb1 *DESCRIPTION
+d585d85927a1215195502347e1619a65 *DESCRIPTION
 768ca2815242ee88ad191606aaf4c6c5 *NAMESPACE
 d1ff06d434e1b2318c8d1028824c42a7 *NEWS
-2455c63611ce3f8cea4ee3c3e969f6a9 *NEWS.md
+7e6397ade9380d624b2541819a29ae3a *NEWS.md
 2d4258d995d2474f630e9c28bddf8c98 *R/AA.MultS.R
 6da266936555d360d251d0d6a7cafcba *R/BifixedContCont.R
 ddebadcc274df3861aa4bf801e18caae *R/BimixedContCont.R
@@ -54,7 +54,7 @@ ace81838b8a3801692b943c2c9e0d913 *R/Pos.Def.Matrices.R
 2e2bdee8f03210a4c33c5ab77c90ecfa *R/Prentice.R
 789ad1b36479d5682815efba3c6e97a0 *R/RandVec.R
 1dc118de9f45fdcb817523bc1bde91c8 *R/Restrictions.BinBin.R
-f60d0534d2d864945fb5a3f232282082 *R/SPF.BinCont.R
+5b33d59f6f159ebf707b4d79427c2e5a *R/SPF.BinCont.R
 883fb157d46a842cabaec160c6a5a1f1 *R/SPP.BinBin.R
 188b5d471d9c4f8fa4ba2b1c4b820887 *R/Sim.Data.Counterfactuals.R
 a0c484fb966b20a5dc281e256e6dba46 *R/Sim.Data.MTS.R
@@ -62,7 +62,6 @@ b09cb4ef3046a03d5c48d3a501309986 *R/Sim.Data.STS.R
 0ac546ac64e36d957d2581d7f41d1cc3 *R/SimDataCounterfactualsBinBin.R
 28bab5c19ef11ac9b92174fbb6217bcd *R/SimDataSTSBinBin.R
 88c096ba5a74f5f3b6c479bbd1d21e03 *R/Single.Trial.RE.AA.R
-9192b631cb1f2fc0545d88df1a55d26d *R/Summary.SPF.BinCont.R
 bea240dbd0bdf6c82538210231a1f03e *R/SummaryITContCont.R
 91aa1c0cbf1f0aa722e2b83e1cba00ea *R/SummaryMaxEntSPFBinBin.R
 5bffe555e3ce91763e6250e8bf464bff *R/SummaryMetaAnalyticMTSContCont.R
@@ -91,7 +90,6 @@ a2afa114d6afc074202d31d1cd3c084f *R/plot.InfoTheoretic.R
 e73aa91b12cc66febcf3a2ad0658efec *R/plot.MetaAnalyticMTS.R
 5678518bd29cd652b1b743da3231534e *R/plot.MetaAnalyticSTS.R
 fb3ffcfe5091f3cc230e247b64a2b6bb *R/plot.PPE.BinBin.R
-43698b28088ae20f5dc4a59b5ca163e6 *R/plot.SPPBinCont.R
 e30f75a5bb6521db60e53d65921d908e *R/plot.SurvSurv.R
 b3e8fd5e9949f1869473a5f1af31862f *R/plot.TrialLevelIT.R
 09127da73e28812069ab12547c20abd4 *R/plot.TrialLevelMA.R
@@ -100,6 +98,7 @@ ceabdd88e9f3c3084dec8136be9b9406 *R/plot.comb27.BinBin.R
 267b3fe6ce52be67998b7eac6ace20e2 *R/plot_ICABinBin.R
 ddd646f78819f170f2369910b5de80a3 *R/plot_ICABinCont.R
 2780ad21cda5044c124d117a85de5cbd *R/plot_MaxEntICABinBin.R
+281ef8255693f6d66c3f81d6028b7e53 *R/plot_SPF.BinCont.R
 a2a967c43f2149929ab562b5bc601c30 *R/plot_SPPBinBin.R
 a2e79408554787f40515a339f3f7c530 *R/sensitivity_analysis_BinCont_copula.R
 4406a2c064c214701e343175d658ef67 *R/sensitivity_analysis_SurvSurv.R
@@ -116,6 +115,7 @@ ac36e8fa9329cb0402e0411a83e8023f *R/summary.TrialLevelIT.R
 7fc3055c832e97c189d09ffea33d8816 *R/summary_ICABinCont.R
 3dea53deae611aefa2ee9f546354a7a7 *R/summary_MaxEntContCont.R
 ddedf1f868a5cb58e22fefa8d9666cb4 *R/summary_MaxEntICABinBin.R
+f7b738160bc7eb4d26934c9f1b8dd1e9 *R/summary_SPFBinCont.R
 f36e5cde570eaf60e6ae8a589723c3da *R/survbin.R
 40230971c96e862ad6075faa80828490 *R/survcat.R
 01ece7f60741a5828e01d06ab0df6a6d *R/utils.R
@@ -184,8 +184,8 @@ c44bd25c7f9d0bef395904252e07d442 *man/Pred.TrialT.ContCont.Rd
 7df9890cd3a23678fe9f5d61cd07d964 *man/Prentice.Rd
 b0df4312f3d7c49e8ae058e78f079e50 *man/RandVec.Rd
 2335f020553d3e66977ba1a11c23c879 *man/Restrictions.BinBin.Rd
+1586a5a87fce65ea33bc0636db2ef408 *man/SPF.BinCont.Rd
 8fb15d04f8bc5ec90240087e537149a4 *man/SPP.BinBin.Rd
-fdcec7dda5c8799aa153a480e5604c5c *man/SPP.BinCont.Rd
 6c3dd8456cc5afd4c3b6db06397e54f3 *man/Schizo.Rd
 51fabeeb00b2ffff321ba72780baa38f *man/Schizo_Bin.Rd
 602ec8c6e7c51bd19874b846b89335ff *man/Schizo_BinCont.Rd
@@ -231,9 +231,9 @@ f19f5353c29d4b751196f1da7600f527 *man/model_fit_measures.Rd
 31c4fe8499c181aa142e5269115badf3 *man/pdf_fun.Rd
 9d50fdada69c2136440688b7f7a1398a *man/plot.CausalInference.Rd
 e4427d344479a8908ece938ef4094b4a *man/plot.Fano.BinBin.Rd
+8adc2d643755d838eae6b65aa5b6fe2b *man/plot.ICA.BinCont.Rd
 255f1b3a28d3a4915bd0e214202e4543 *man/plot.ICA.ContCont.Mult.Rd
 3895a6d1a0e61e057a26d7d9c9a71238 *man/plot.ICABinBin.Rd
-a836b5300af702214748bf6b885a095a *man/plot.ICABinCont.Rd
 b96c69f8722f74240132e04e5d7ef4ed *man/plot.ISTE.ContCont.Rd
 85924b026bc1c26b267c8dd0e452fbd3 *man/plot.InformationTheoretic.Rd
 12ae7e08ec5a34a0b349475416e7353d *man/plot.InformationTheoreticBinCombn.Rd
@@ -244,8 +244,8 @@ b5d702b43cb828bc90173cb8a03e5745 *man/plot.MaxEntContCont.Rd
 119bd6aa1bc29e1b7ee2a04ca00f2433 *man/plot.MetaAnalytic.Rd
 8a53fc6a4e75750da35944262f9a1ee8 *man/plot.MinSurrContCont.Rd
 24dc8be7f710280e8fb7553f2178a877 *man/plot.PPE.BinBin.Rd
+f7e3eadc1e8404f1522ecbc9a3472276 *man/plot.SPF.BinCont.Rd
 f6f23ec89e76e7af1aaf35b58ea5dc35 *man/plot.SPPBinBin.Rd
-f9eb58a9c565729596d41a35fe12b565 *man/plot.SPPBinCont.Rd
 e6062db25aae0825944eea371b6ef4d0 *man/plot.TrialLevelIT.Rd
 3241f36f4c01fc7d3a30ebb411c166bc *man/plot.TrialLevelMA.Rd
 11b92825b1890f507a1383cac1454e32 *man/plot.TwoStageSurvSurv.Rd
