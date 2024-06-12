@@ -1,11 +1,12 @@
 Package: Surrogate
 Type: Package
 Title: Evaluation of Surrogate Endpoints in Clinical Trials
-Version: 3.2.6
+Version: 3.3.0
 Authors@R: c(
   person("Wim", "Van Der Elst", email = "wim.vanderelst@gmail.com", role = c("cre", "aut")),
   person("Florian", "Stijven", email = "florian.stijven@kuleuven.be", role = "aut"),
   person("Fenny", "Ong", role = "aut"),
+  person("Dries", "De Witte", role = "aut"),
   person("Paul", "Meyvisch", role = "aut"),
   person("Alvaro", "Poveda", role = "aut"),
   person("Ariel", "Alonso", role = "aut"),
@@ -41,10 +42,11 @@ Suggests: copula, FNN, mgcv, testthat (>= 3.0.0), vdiffr, parallel,
 Config/testthat/edition: 3
 URL: https://github.com/florianstijven/Surrogate-development
 BugReports: https://github.com/florianstijven/Surrogate-development/issues
-Packaged: 2024-05-27 12:08:53 UTC; u0157247
+Packaged: 2024-06-07 15:40:44 UTC; u0157247
 Author: Wim Van Der Elst [cre, aut],
   Florian Stijven [aut],
   Fenny Ong [aut],
+  Dries De Witte [aut],
   Paul Meyvisch [aut],
   Alvaro Poveda [aut],
   Ariel Alonso [aut],
@@ -52,4 +54,4 @@ Author: Wim Van Der Elst [cre, aut],
   Christoper Weir [aut],
   Geert Molenberghs [aut]
 Maintainer: Wim Van Der Elst <wim.vanderelst@gmail.com>
-Date/Publication: 2024-05-27 12:30:02 UTC
+Date/Publication: 2024-06-12 07:10:02 UTC
