@@ -1,7 +1,7 @@
-c919584f8d4db2e07b1403ea7dcd544a *DESCRIPTION
+54f31e2c268d04e2d0ee0feee29ce241 *DESCRIPTION
 21fe7711dd2a9099a5f13a3517b7a0c0 *NAMESPACE
 d1ff06d434e1b2318c8d1028824c42a7 *NEWS
-cc66381da4b413b4ac9da2e0e403e23f *NEWS.md
+0202a844038b0975511f76e7d0c3a4d9 *NEWS.md
 4e99483cc38e8852b14c7aeb3d322815 *R/AA.MultS.R
 6da266936555d360d251d0d6a7cafcba *R/BifixedContCont.R
 ddebadcc274df3861aa4bf801e18caae *R/BimixedContCont.R
@@ -384,8 +384,8 @@ de0ddff75eb6746dc40abd7b8395a407 *tests/testthat/test-MetaAnalyticSurvCont.R
 09f31bf927c5b19b637150f6f48e3f1e *tests/testthat/test-MetaAnalyticSurvSurv.R
 18f3a8ca5f294c5180f126b39017e490 *tests/testthat/test-copula_utils.R
 077e753e034ef6519e47bd9d54ed9c3e *tests/testthat/test-fit_model_BinCont_copula.R
-9d926bc2556ff0c42e65b2b6c57a7b24 *tests/testthat/test-fit_model_ContCont_copula.R
-b7c73179fa7ee0977dd2becf6c5b9fb1 *tests/testthat/test-fit_model_OrdCont_copula.R
+a603300a1546d33b59f15d244198f055 *tests/testthat/test-fit_model_ContCont_copula.R
+3f0171990ed51cb689f1106c056cad3f *tests/testthat/test-fit_model_OrdCont_copula.R
 daab64f0cc6ec1b6b72c130ae567fb9f *tests/testthat/test-fit_model_OrdOrd_copula.R
 3af6c11cfe77eed7e3476e3a04c032e4 *tests/testthat/test-fit_model_SurvSurv.R
 450989c5f1db2251c64bc485bf7a5ece *tests/testthat/test-goodness_of_fit_SurvSurv.R
