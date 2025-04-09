@@ -1,7 +1,7 @@
-54f31e2c268d04e2d0ee0feee29ce241 *DESCRIPTION
-21fe7711dd2a9099a5f13a3517b7a0c0 *NAMESPACE
+49faa36df75e55cd360135cf4e5d5be7 *DESCRIPTION
+6353bb178fbd1e93e658bf9083491e48 *NAMESPACE
 d1ff06d434e1b2318c8d1028824c42a7 *NEWS
-0202a844038b0975511f76e7d0c3a4d9 *NEWS.md
+e1a78624dd40809a6f77e1b017583718 *NEWS.md
 4e99483cc38e8852b14c7aeb3d322815 *R/AA.MultS.R
 6da266936555d360d251d0d6a7cafcba *R/BifixedContCont.R
 ddebadcc274df3861aa4bf801e18caae *R/BimixedContCont.R
@@ -38,6 +38,8 @@ eec88a43af2133b1ae9bdc34bbbcac49 *R/ICA_BinCont_copula.R
 cf57200697339e09df28f8125717a898 *R/ICA_OrdCont_copula.R
 877cba64ccaea0c0a06208babd206a99 *R/ICA_OrdOrd_copula.R
 a454f9fe528a5f524265d4cb92d947dd *R/ICA_SurvSurv_copula.R
+9d9abbdc98d7b082f516324329072156 *R/ICA_alpha_ContCont.R
+0f0848773c682fc3a7292cd8c0457a2e *R/ICA_t.R
 8496dfdf2a910b0b3d1958e461af1395 *R/ISTE.ContCont.R
 5f08927cf496b74cc5c6befd93f5a203 *R/ITCI-Dvine-inference-utils.R
 a92854cbe79b3a1bffb1d28912744361 *R/LongToWide.R
@@ -176,8 +178,10 @@ d3991324ed1ab48851b319955e3537a0 *man/ICA.ContCont.Mult_alt.Rd
 cb959714245a20e1c854fef6cdd82c3b *man/ICABinBinCounterAssum.Rd
 cc86a2b639f70c57935adaf1872abf5b *man/ICABinCont.Rd
 13d3fc068920ed4f952d5879b152eab8 *man/ICAContCont.Rd
+386dc9d1182338c2cdce4612003276ae *man/ICA_alpha_ContCont.Rd
 9c1b3e2a9b8530d72e4d39500ddee328 *man/ICA_given_model_constructor.Rd
 1b7f1a8f9fde55d9c52fa0d37874127b *man/ICA_given_model_constructor_SurvSurv.Rd
+0060c52593cbc760f38d86bb1cbbfc95 *man/ICA_t.Rd
 5d825a04af1695b4f26c664decc5fd20 *man/ISTE.ContCont.Rd
 88673b04a974f3a2d1ea16518d93387f *man/LongToWide.Rd
 d800c3758c7778f429a8985209ddb47b *man/MICA.Sample.ContCont.Rd
@@ -217,7 +221,7 @@ e01b891ba0b8b9c0b6a91f33cf300f21 *man/Sim.Data.Counterfactuals.Rd
 b3b60cd5e7c16ab63f7a53925d204be5 *man/Sim.Data.STS.Rd
 93f7fbf8e0ecc37e5518d928cf93eee0 *man/Sim.Data.STSBinBin.Rd
 7b7ed2fdbc7124c42a589fdc7a3642b3 *man/Single.Trial.RE.AA.Rd
-ab85bbf8a53ee892e2c567650a59baa1 *man/Surrogate-package.Rd
+9c181caa14a031cdbb30eddf6d56c1c8 *man/Surrogate-package.Rd
 ffba2e9891b426e186dca8d8541317ae *man/SurvSurv.Rd
 590c73e1837a1aac5e57869204bc0fb7 *man/Test.Mono.Rd
 1c8ada43540db7ed593a1716d21981b8 *man/TrialLevelIT.Rd
@@ -396,3 +400,5 @@ dc3a353b02c94ed1ef9bd2bce60b2cad *tests/testthat/test-sensitivity_analysis_BinCo
 b922d67d5b10a9a831e20600d1cd0140 *tests/testthat/test-sensitivity_analysis_SurvSurv.R
 635eb571dca8fc71b51ac392734bbcba *tests/testthat/test-sensitivity_analysis_copula.R
 4e5c7a236fa0dc1c53e6c86b0abfe063 *tests/testthat/test-sensitivity_intervals.R
+01c56df165a4d0f7dd0aee2588e692e0 *tests/testthat/test_ICA_alpha_ContCont.R
+dcddfa6a6e288ce104434f5a27486b34 *tests/testthat/test_ICA_t.R
