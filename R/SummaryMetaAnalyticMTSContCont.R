@@ -2,6 +2,14 @@
 summary.UnifixedContCont <- summary.UnimixedContCont <- function(object, ..., Object){
 
   if (missing(Object)){Object <- object}
+  
+  Object$Data.Analyze$Surr <- as.numeric(as.character(Object$Data.Analyze$Surr))
+  Object$Data.Analyze$True <- as.numeric(as.character(Object$Data.Analyze$True))
+  
+  Object$Obs.Per.Trial$Number.cont.Treat <- as.numeric(as.character(Object$Obs.Per.Trial$Number.cont.Treat))
+  Object$Obs.Per.Trial$Number.exp.Treat <- as.numeric(as.character(Object$Obs.Per.Trial$Number.exp.Treat))
+  Object$Obs.Per.Trial$Obs.per.trial <- as.numeric(as.character(Object$Obs.Per.Trial$Obs.per.trial))
+    
   cat("\nFunction call:\n\n")
   print(Object$Call)
   cat("\n\n# Data summary and descriptives")
@@ -39,6 +47,7 @@ summary.UnifixedContCont <- summary.UnimixedContCont <- function(object, ..., Ob
   print(format(round(Object$Indiv.R, 4), nsmall = 4))
 
   #ICA
+  if (Object$ICA[[1]] != FALSE){
   mode <- function(data) {
     x <- data
     z <- density(x)
@@ -61,6 +70,7 @@ summary.UnifixedContCont <- summary.UnimixedContCont <- function(object, ..., Ob
   cat("\n\nObtained under correlation structure:\n")
   print(Fit$Table.ICA.Entropy[1,3:8], row.names = "")
   cat("\n")
+  }
 }
 
 summary.BifixedContCont <- function(object, ..., Object){
@@ -103,6 +113,7 @@ summary.BifixedContCont <- function(object, ..., Object){
   print(format(round(Object$Indiv.R, 4), nsmall = 4))
 
   #ICA
+  if (Object$ICA[[1]] != FALSE){
   mode <- function(data) {
     x <- data
     z <- density(x)
@@ -125,6 +136,7 @@ summary.BifixedContCont <- function(object, ..., Object){
   cat("\n\nObtained under correlation structure:\n")
   print(Fit$Table.ICA.Entropy[1,3:8], row.names = "")
   cat("\n")
+  }
 }
 
 #' @export
@@ -168,6 +180,7 @@ summary.BimixedContCont <- function(object, ..., Object){
   print(format(round(Object$Indiv.R, 4), nsmall = 4))
 
   #ICA
+  if (Object$ICA[[1]] != FALSE){
   mode <- function(data) {
     x <- data
     z <- density(x)
@@ -190,4 +203,5 @@ summary.BimixedContCont <- function(object, ..., Object){
   cat("\n\nObtained under correlation structure:\n")
   print(Fit$Table.ICA.Entropy[1,3:8], row.names = "")
   cat("\n")
+  }
 }

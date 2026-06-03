@@ -8,7 +8,8 @@ The function \code{Single.Trial.RE.AA} conducts a surrogacy analysis based on th
 
 \usage{
 Single.Trial.RE.AA(Dataset, Surr, True, Treat, Pat.ID, Alpha=.05, 
-Number.Bootstraps=500, Seed=sample(1:1000, size=1))
+Number.Bootstraps=500, Seed=sample(1:1000, size=1), 
+Exclude.Outliers.Bootstrap=TRUE)
 }
 \arguments{
   \item{Dataset}{A \code{data.frame} that should consist of one line per patient. Each line contains (at least) a surrogate value, a true endpoint value, a treatment indicator, and a patient ID.}
@@ -17,7 +18,8 @@ Number.Bootstraps=500, Seed=sample(1:1000, size=1))
   \item{Treat}{The name of the variable in \code{Dataset} that contains the treatment indicators. The treatment indicator should either be coded as \eqn{1} for the experimental group and \eqn{-1} for the control group, or as \eqn{1} for the experimental group and \eqn{0} for the control group. The \eqn{-1/1} coding is recommended. }
   \item{Pat.ID}{The name of the variable in \code{Dataset} that contains the patient's ID.}
   \item{Alpha}{The \eqn{\alpha}-level that is used to determine the confidence intervals around Alpha (which is a parameter estimate of a model where the surrogate is regressed on the treatment indicator, see \bold{Details} below), Beta, RE, and \eqn{\gamma}. Default \eqn{0.05}.}  
-\item{Number.Bootstraps}{The number of bootstrap samples that are used to obtain the bootstrapp-based confidence intervals for RE and the adjusted association (\eqn{\gamma}). Default \eqn{500}.}
+\item{Number.Bootstraps}{The number of bootstrap samples that are used to obtain the bootstrap-based confidence intervals for RE and the adjusted association (\eqn{\gamma}). Default \eqn{500}.}
+\item{Exclude.Outliers.Bootstrap}{Should outlying bootstrapped samples (see below) be automatically excluded? Default \code{Exclude.Outliers.Bootstrap=TRUE}.}
   \item{Seed}{The seed that is used to generate the bootstrap samples. Default \code{sample(x=1:1000, size=1)}, i.e., a random number between 1 and 1000.}
 }
 \details{
