@@ -41,7 +41,6 @@ A single \eqn{\rho_{\Delta}} value is obtained when all correlations in the func
 \item{Pos.Def}{A \code{data.frame} that contains the positive definite matrices that can be formed based on the user-specified correlations. These matrices are used to compute the vector of the \eqn{\rho_{\Delta}} values.}
 \item{ICA}{A scalar or vector that contains the individual causal association (ICA; \eqn{\rho_{\Delta}}) value(s).}
 \item{GoodSurr}{A \code{data.frame} that contains the ICA (\eqn{\rho_{\Delta}}), \eqn{\sigma_{\Delta_{T}}}, and \eqn{\delta}.}  
-\item{Variances}{A vector that contains the specified variances in the function call (T0T0, T1T1, S0S0, S1S1).} 
 }
 \references{
 Alonso, A., Van der Elst, W., Molenberghs, G., Buyse, M., & Burzykowski, T. (submitted). On the relationship between the causal-inference and meta-analytic paradigms for the validation of surrogate markers. 

@@ -1,7 +1,7 @@
 Package: Surrogate
 Type: Package
 Title: Evaluation of Surrogate Endpoints in Clinical Trials
-Version: 3.4.2
+Version: 3.4.3
 Authors@R: c(
   person("Wim", "Van Der Elst", email = "wim.vanderelst@gmail.com", role = c("cre", "aut")),
   person("Florian", "Stijven", email = "florian.stijven@kuleuven.be", role = "aut"),
@@ -38,13 +38,14 @@ Repository: CRAN
 NeedsCompilation: no
 RoxygenNote: 7.3.3
 Encoding: UTF-8
+LazyData: true
 Suggests: copula, FNN, mgcv, testthat (>= 3.0.0), vdiffr, parallel,
         fitdistrplus, kdecopula, cubature, mvtnorm, withr, stringr,
         ggplot2, sn, pracma
 Config/testthat/edition: 3
 URL: https://github.com/florianstijven/Surrogate-development
 BugReports: https://github.com/florianstijven/Surrogate-development/issues
-Packaged: 2026-06-03 14:31:11 UTC; wvandere
+Packaged: 2026-10-15 22:03:09 UTC; gokcedeliorman
 Author: Wim Van Der Elst [cre, aut],
   Florian Stijven [aut],
   Fenny Ong [aut],
@@ -57,4 +58,4 @@ Author: Wim Van Der Elst [cre, aut],
   Christoper Weir [aut],
   Geert Molenberghs [aut]
 Maintainer: Wim Van Der Elst <wim.vanderelst@gmail.com>
-Date/Publication: 2026-06-03 15:00:02 UTC
+Date/Publication: 2026-10-16 08:40:19 UTC

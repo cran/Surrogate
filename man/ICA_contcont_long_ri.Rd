@@ -6,99 +6,38 @@
 for a continuous surrogate and true endpoint measured repeatedly over time in a single-trial setting}
 \usage{
 ICA_contcont_long_ri(
-  p = numeric(),
-  AR1 = TRUE,
-  AR1_rho = numeric(),
-  VT0S0,
-  VT1S1,
-  VT0T0,
-  VT1T1,
-  VS0S0,
-  VS1S1,
-  VT0T1 = seq(-1, 1, by = 0.1),
-  VT0S1 = seq(-1, 1, by = 0.1),
-  VT1S0 = seq(-1, 1, by = 0.1),
-  VS0S1 = seq(-1, 1, by = 0.1),
-  DT0S0,
-  DT1S1,
-  DT0T0,
-  DT1T1,
-  DS0S0,
-  DS1S1,
-  DT0T1 = seq(-1, 1, by = 0.1),
-  DT0S1 = seq(-1, 1, by = 0.1),
-  DT1S0 = seq(-1, 1, by = 0.1),
-  DS0S1 = seq(-1, 1, by = 0.1)
+  V0,
+  V1,
+  D0,
+  D1,
+  times,
+  correlation = c("exponential", "compound_symmetry", "independence"),
+  temporal_rho = NULL,
+  grid_V = seq(-1, 1, by = 0.1),
+  grid_D = seq(-1, 1, by = 0.1),
+  return_candidates = FALSE,
+  tol = 1e-12
 )
 }
 \arguments{
-\item{p}{(numeric) number of time points}
+\item{V0, V1}{Treatment-specific residual 2 x 2 covariance matrices for T,S.}
 
-\item{AR1}{(logical) should be \code{TRUE}. Other correlation structures for \code{R}
-can be added later.}
+\item{D0, D1}{Treatment-specific random-intercept 2 x 2 covariance matrices for T,S.}
 
-\item{AR1_rho}{(numeric) AR(1) correlation parameter for \eqn{R}. It must be
-a single value in \verb{(-1, 1)}.}
+\item{times}{Clinical evaluation time points.}
 
-\item{VT0S0}{A scalar that specifies the covariance between the surrogate and
-the true endpoint in the control treatment condition for the \code{V} matrix.}
+\item{correlation}{Temporal correlation structures such as exponential, compound_symmetry, and independence.}
 
-\item{VT1S1}{A scalar that specifies the covariance between the surrogate and
-the true endpoint in the experimental treatment condition for the \code{V} matrix.}
+\item{temporal_rho}{Temporal-correlation parameter. Ignored when \code{correlation = "independence"}}
 
-\item{VT0T0}{A scalar that specifies the variance of the true endpoint in the
-control treatment condition for the \code{V} matrix.}
+\item{grid_V}{Sensitivity grid for unidentified residual correlations.}
 
-\item{VT1T1}{A scalar that specifies the variance of the true endpoint in the
-experimental treatment condition for the \code{V} matrix.}
+\item{grid_D}{Sensitivity grid for unidentified random-intercept correlations.}
 
-\item{VS0S0}{A scalar that specifies the variance of the surrogate endpoint in
-the control treatment condition for the \code{V} matrix.}
+\item{return_candidates}{Logical. If \code{TRUE}, the retained admissible covariance
+completion candidates for the residual and random-intercept components are returned.}
 
-\item{VS1S1}{A scalar that specifies the variance of the surrogate endpoint in
-the experimental treatment condition for the \code{V} matrix.}
-
-\item{VT0T1}{A scalar or vector that contains the correlation(s) between the
-counterfactuals \code{T0} and \code{T1} for the \code{V} matrix.}
-
-\item{VT0S1}{A scalar or vector that contains the correlation(s) between the
-counterfactuals \code{T0} and \code{S1} for the \code{V} matrix.}
-
-\item{VT1S0}{A scalar or vector that contains the correlation(s) between the
-counterfactuals \code{T1} and \code{S0} for the \code{V} matrix.}
-
-\item{VS0S1}{A scalar or vector that contains the correlation(s) between the
-counterfactuals \code{S0} and \code{S1} for the \code{V} matrix.}
-
-\item{DT0S0}{A scalar that specifies the covariance between the surrogate and
-the true endpoint in the control treatment condition for the \code{D} matrix.}
-
-\item{DT1S1}{A scalar that specifies the covariance between the surrogate and
-the true endpoint in the experimental treatment condition for the \code{D} matrix.}
-
-\item{DT0T0}{A scalar that specifies the variance of the true endpoint in the
-control treatment condition for the \code{D} matrix.}
-
-\item{DT1T1}{A scalar that specifies the variance of the true endpoint in the
-experimental treatment condition for the \code{D} matrix.}
-
-\item{DS0S0}{A scalar that specifies the variance of the surrogate endpoint in
-the control treatment condition for the \code{D} matrix.}
-
-\item{DS1S1}{A scalar that specifies the variance of the surrogate endpoint in
-the experimental treatment condition for the \code{D} matrix.}
-
-\item{DT0T1}{A scalar or vector that contains the correlation(s) between the
-counterfactuals \code{T0} and \code{T1} for the \code{D} matrix.}
-
-\item{DT0S1}{A scalar or vector that contains the correlation(s) between the
-counterfactuals \code{T0} and \code{S1} for the \code{D} matrix.}
-
-\item{DT1S0}{A scalar or vector that contains the correlation(s) between the
-counterfactuals \code{T1} and \code{S0} for the \code{D} matrix.}
-
-\item{DS0S1}{A scalar or vector that contains the correlation(s) between the
-counterfactuals \code{S0} and \code{S1} for the \code{D} matrix.}
+\item{tol}{Numerical tolerance used when checking positive definiteness and validating ICA values.}
 }
 \value{
 \itemize{
@@ -109,92 +48,95 @@ positive definite \code{D} matrices.
 \item Num.Pos.Def.Pairs: An object of class numeric that contains the number of
 valid \code{V-D} pairs used in the final calculations.
 \item R2_Lambda: A scalar or vector that contains the individual causal association \eqn{R_{\Lambda}^2}.
+\item V_candidates: retained residual covariance candidates, if requested.
+\item D_candidates: retained random-intercept covariance candidates, if requested.
 }
 }
 \description{
-This function quantifies surrogacy under a linear model with subject-specific
-random intercepts and separable residual covariance structure. See Details below.
+The function quantifies surrogacy under linear model
+with subject-specific random intercepts with separable residual covariance structure. See Details below.
 }
 \section{Random intercepts with separable residual covariance structure:}{
-The evolution of \eqn{y_j} over time is defined using a linear model with a
-subject-specific random intercept for each potential outcome.
-\deqn{T_{0j} = x_{T0j} \gamma_{T0} + b_{T0} + \varepsilon_{T0j}}
-\deqn{T_{1j} = x_{T1j} \gamma_{T1} + b_{T1} + \varepsilon_{T1j}}
-\deqn{S_{0j} = x_{S0j} \gamma_{S0} + b_{S0} + \varepsilon_{S0j}}
-\deqn{S_{1j} = x_{S1j} \gamma_{S1} + b_{S1} + \varepsilon_{S1j}}
+The evolution of \eqn{y_j} over time is defined using a linear model with subject-specific random intercept
+for each potential outcome.
+\deqn{T_{0j} = x_{T0j} \gamma_{T0} + b_{T0}+ \varepsilon_{T0j}}
+\deqn{T_{1j} = x_{T1j} \gamma_{T1} + b_{T1}+ \varepsilon_{T1j}}
+\deqn{S_{0j} = x_{S0j} \gamma_{S0} + b_{S0}+ \varepsilon_{S0j}}
+\deqn{S_{1j} = x_{S1j} \gamma_{S1} + b_{S1}+ \varepsilon_{S1j}}
 
-It can be written as \eqn{y = x \gamma + b + \varepsilon}, where
-\eqn{b \sim N(0, D)} with \eqn{D} an unstructured \eqn{4 \times 4}
-covariance matrix and \eqn{\varepsilon \sim N(0, \Sigma)}. The marginal
-model follows that \eqn{y \sim N(0, \Sigma_y)} where
-\eqn{\Sigma_y = zDz^\top + \Sigma} with \eqn{\Sigma = R \otimes V}. Here
-\code{V} is assumed to be unstructured and invariant across time.
+It can be written as \eqn{y=x \gamma + b+ \varepsilon} where \eqn{b \sim N(0, D)}
+with \eqn{D} an unstructured \eqn{4 \times 4} covariance matrix and \eqn{\varepsilon \sim N(0, \Sigma)}.
+The marginal model follows that \eqn{y \sim N(0, \Sigma_y)} where \eqn{\Sigma_y= zDz+ \Sigma}
+with \eqn{\Sigma = R \otimes V}.
+\eqn{V} is assumed to be unstructured and
+invariant across time, and \eqn{R} reflects a general correlation matrix.
 
-The marginal covariance matrix of the individual causal treatment effects is
-\deqn{\Sigma_{\Delta} = \Sigma_u \otimes R + \Sigma_D \otimes 1_p 1_p^\top}
-with \eqn{\Sigma_u = Q V Q^\top} and \eqn{\Sigma_D = Q D Q^\top}, where
-\eqn{Q} maps \eqn{(T_0, T_1, S_0, S_1)} to \eqn{(\Delta T, \Delta S)}.
+The marginal covariance matrix of the individual causal treatment effects:
+\deqn{\Sigma_\Delta= \Sigma_u \otimes \R + \Sigma_D\otimes 1_p 1_p^\top}
 
-Under the random-intercept model, the ICA metric is given by:
-\deqn{R_{\Lambda}^{2} = 1 - (1 - \rho_u^2)^{p - 1}(1 - \rho_{ud}^2)}
+with \eqn{\Sigma_u=QVQ^\top} and \eqn{\Sigma_D=QDQ^\top} a \eqn{2\times 2} matrix.
+Equivalently, \eqn{\Sigma_{\Delta}} has blocks
+\deqn{\Sigma_{\Delta T\Delta T}=d_{11}(1_{p}1^\top_{p})+u_{11}R,\quad
+ \Sigma_{\Delta T\Delta S}=d_{12}(1_{p}1^\top_{p})+u_{12}R,\quad
+ \Sigma_{\Delta S\Delta S}=d_{22}(1_{p}1^\top_{p})+u_{22}R }
+
+Under the random-intercept model specified, the ICA metric is given by:
+\deqn{ R_{\Lambda}^{2}=1-(1-\rho_{u}^{2})^{p-1}\,(1-\rho_{ud}^{2}) }
 where
-\deqn{
-\rho_u^2 = \frac{u_{12}^2}{u_{11} u_{22}},
-\qquad
-\rho_{ud}^2 = \frac{(u_{12} + \alpha d_{12})^2}
-{(u_{11} + \alpha d_{11})(u_{22} + \alpha d_{22})}
-}
-and \eqn{\alpha = 1_p^\top R^{-1} 1_p}.
 
-If \eqn{R} is assumed to follow a first-order autoregressive structure, then
-\deqn{\alpha = \frac{p - \rho p + 2\rho}{1 + \rho}}
-where \code{rho = AR1_rho}.
+\deqn{\rho_{u}^{2}
+=\frac{u_{12}^{2}}{u_{11}\,u_{22}},
+ \qquad
+ \rho_{ud}^{2}
+ =\frac{(u_{12}+\alpha\,d_{12})^{2}}
+ {(u_{11}+\alpha\,d_{11})(u_{22}+\alpha\,d_{22})},
+ \qquad\mbox{and}\qquad
+ \alpha=1_{p}^{\top}R^{-1}1_{p}}
+
+Here \eqn{u_{ij}} are the entries of \eqn{\Sigma_{u}}
+and \eqn{d_{ij}} those of \eqn{\Sigma_{D}}.
 }
 
 \examples{
-# Example output for the random-intercept model (symbolic 4x4 V matrix)
-# V = | VT0T0  VT0T1  VT0S0  VT0S1 |
-#     | VT0T1  VT1T1  VT1S0  VT1S1 |
-#     | VT0S0  VT1S0  VS0S0  VS0S1 |
-#     | VT0S1  VT1S1  VS0S1  VS1S1 |
+#Example outputs
 
-# Example output for the random-intercept model (symbolic 4x4 D matrix)
-# D = | DT0T0  DT0T1  DT0S0  DT0S1 |
-#     | DT0T1  DT1T1  DT1S0  DT1S1 |
-#     | DT0S0  DT1S0  DS0S0  DS0S1 |
-#     | DT0S1  DT1S1  DS0S1  DS1S1 |
-
-ICA_contcont_long_ri(
-  p = 6,
-  AR1 = TRUE,
-  AR1_rho = 0.689,
-  VT0S0 = 0.02377,
-  VT1S1 = 0.03410,
-  VT0T0 = 0.03685,
-  VT1T1 = 0.04968,
-  VS0S0 = 0.04581,
-  VS1S1 = 0.06830,
-  VT0T1 = seq(-1, 1, by=.2),
-  VT0S1 = seq(-1, 1, by=.2),
-  VT1S0 = seq(-1, 1, by=.2),
-  VS0S1 = seq(-1, 1, by=.2),
-  DT0S0 = 0.02131,
-  DT1S1 = 0.02289,
-  DT0T0 = 0.03301,
-  DT1T1 = 0.02588,
-  DS0S0 = 0.02801,
-  DS1S1 = 0.02428,
-  DT0T1 = seq(-1, 1, by=.2),
-  DT0S1 = seq(-1, 1, by=.2),
-  DT1S0 = seq(-1, 1, by=.2),
-  DS0S1 = seq(-1, 1, by=.2)
-)
+V0 <- matrix(c(0.02579325, 0.02514841,
+              0.02514841, 0.02872256),
+              nrow = 2, byrow = TRUE,
+              dimnames = list(c("T", "S"), c("T", "S")))
 
 
+V1 <- matrix(c(0.02907611, 0.02962312,
+               0.02962312, 0.03400179),
+               nrow = 2, byrow = TRUE,
+               dimnames = list(c("T", "S"), c("T", "S")))
+
+D0 <- matrix(c(0.02587092, 0.02458997,
+               0.02458997, 0.02405581),
+               nrow = 2, byrow = TRUE,
+               dimnames = list(c("T", "S"), c("T", "S")))
+
+D1 <- matrix(c(0.03649246, 0.03225987,
+              0.03225987, 0.02897932),
+              nrow = 2, byrow = TRUE,
+              dimnames = list(c("T", "S"), c("T", "S")))
+
+# Example run
+ica_ri<- ICA_contcont_long_ri(V0 = V0,  V1 = V1,
+                     D0 = D0,  D1 = D1,
+                     times=c(1,2,4,6,8),
+                     correlation  = "exponential",
+                     temporal_rho = 0.7117544 ,
+                     grid_V = seq(-1, 1, by = 0.5),
+                     grid_D = seq(-1, 1, by = 0.5),
+                     return_candidates = FALSE,
+                     tol = 1e-12)
+
+summary_longitudinal_ica(ica_ri)
 
 }
 \references{
-Deliorman, G., Pardo, M. C., Van der Elst, W., Molenberghs, G., & Alonso, A.
-(submitted in 2026). Assessing Surrogate Endpoints in Longitudinal Studies:
-An Information-Theoretic Causal Inference Approach.
+Deliorman, G., Pardo, M. C., Van der Elst W., Molenberghs G., & Alonso, A. (submitted in 2026).
+Assessing Surrogate Endpoints in Longitudinal Studies: An Information-Theoretic
+Causal Inference Approach.
 }
