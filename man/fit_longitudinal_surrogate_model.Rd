@@ -75,14 +75,14 @@ dat <- prepare_longitudinal_surrogate_data(
        time = "Time_cont",
        endpoint = "Endpoint",
        outcome = "Response_log",
-       baseline = "Baseline_log",
        surrogate_label = "BPRS",
        true_label = "PANSS",
        treatment_levels = c(0, 1))
 
-# endpoint- and treatment-specific baseline adjustment.
+# Endpoint- and treatment-specific visit means, including baseline at time 0.
+# Baseline is included as an outcome, not as a separate covariate.
 
-mean_formula <- Y ~ 0 + endpoint:visitF:treatF + endpoint:treatF:Ybase
+mean_formula <- Y ~ 0 + endpoint:visitF:treatF
 
 spec_galecki <- make_longitudinal_re_none(name = "Galecki's marginal model")
 
